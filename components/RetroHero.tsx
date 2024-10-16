@@ -3,19 +3,24 @@ import Link from 'next/link'
 
 export default function RetroHero() {
   return (
-    <div style={{ textAlign: 'center', padding: '20px', backgroundColor: 'white' }}>
-      <h1 style={{ fontSize: '48px', color: '#FF00FF', fontFamily: 'Courier New, bold' }}>
+    <div className="text-center p-5 bg-white">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl text-[#FF00FF] font-bold font-['Courier_New']">
         All Violet The Band
       </h1>
-      <div className="marquee">
-        <p style={{ fontSize: '24px', color: '#FFFF00' }}>
-          <strong style={{ color: '#00FFFF' }}>NEON SEEPING FROM THE PAVEMENT</strong>
+      <div className="marquee overflow-hidden whitespace-nowrap">
+        <p className="text-lg md:text-2xl lg:text-3xl text-[#FFFF00] animate-marquee">
+          <strong className="text-[#00FFFF]">NEON SEEPING FROM THE PAVEMENT</strong>
         </p>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Image src="/changing_pasture.jpg" width={500} height={20} alt="Divider" />
+      <div className="flex justify-center mt-4">
+        <Image 
+          src="/changing_pasture.jpg" 
+          width={500} 
+          height={20} 
+          alt="Divider" 
+          className="w-full max-w-[500px] h-auto"
+        />
       </div>
-      
     </div>
   )
 }
