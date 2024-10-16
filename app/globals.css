@@ -11,4 +11,124 @@
   animation: marquee 20s linear infinite;
 }
 
+/* Retro background */
+html, body {
+  height: 100%;
+  /* background-color: black; */ /* Remove or comment out this line */
+  background-image: url('/clouds.jpg'); /* Update this line */
+  background-repeat: repeat;
+  background-size: cover;
+  color: #00FF00;
+  font-family: 'Courier New', monospace;
+  cursor: url('/images/retro-cursor.cur'), auto;
+}
+
+/* Blinking text */
+.blink {
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Marquee style */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Stylized links */
+a {
+  color: #FF00FF;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #FFFF00;
+  text-decoration: underline;
+}
+
+/* Table borders */
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 2px solid #00FF00;
+}
+
+/* Style buttons */
+button {
+  background-color: #0000FF;
+  color: #FFFFFF;
+  border: 2px solid #00FF00;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #00FF00;
+  color: #000000;
+}
+
 /* Add any other global styles here */
+
+/* Reduce default margins and paddings */
+body, h1, h2, h3, p, ul, li, form {
+  margin: 0;
+  padding: 0;
+}
+
+/* RetroNavBar styles */
+.retro-container {
+  width: 800px;
+  margin: 20px auto;
+  border: 2px solid #808080;
+  background-color: #FFFFFF;
+}
+
+.retro-nav {
+  background-color: #D3D3D3;
+  padding: 10px 0;
+  border-bottom: 2px solid #808080;
+}
+
+.retro-nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.retro-nav li {
+  margin: 0 5px;
+}
+
+.retro-nav a {
+  color: #000000;
+  text-decoration: none;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  padding: 5px 10px;
+  border: 1px solid #808080;
+  background-color: #C0C0C0;
+}
+
+.retro-nav a:hover {
+  background-color: #A9A9A9;
+}
+
+.retro-nav a span.active {
+  font-weight: bold;
+  text-decoration: underline;
+}

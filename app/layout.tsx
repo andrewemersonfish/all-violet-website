@@ -1,5 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import RetroNavBar from '../components/RetroNavBar'
+import RetroFooter from '../components/RetroFooter'
 
 export const metadata: Metadata = {
   title: 'All Violet - Official Band Website',
@@ -13,7 +15,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <link rel="stylesheet" href="/globals.css" />
+      </head>
+      <body className="flex flex-col min-h-screen">
+        <main className="flex-grow">
+          {children}
+        </main>
+        <RetroFooter />
+      </body>
     </html>
   )
 }
