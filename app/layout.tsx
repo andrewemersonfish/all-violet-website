@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import RetroNavBar from '../components/RetroNavBar'
 import RetroFooter from '../components/RetroFooter'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: 'All Violet - Official Band Website',
@@ -23,6 +24,7 @@ export default function RootLayout({
           {children}
         </main>
         <RetroFooter />
+        <SpeedInsights />
       </body>
     </html>
   )
