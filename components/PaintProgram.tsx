@@ -55,6 +55,7 @@ export default function PaintProgram({ onClose }: { onClose: () => void }) {
     <RetroWindow
       title="Untitled - Paint"
       onClose={onClose}
+      zIndex={1}
       content={
         <div>
           <div className="flex justify-around mb-6">
