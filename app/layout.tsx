@@ -1,12 +1,13 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import RetroNavBar from '../components/RetroNavBar'
-import RetroFooter from '../components/RetroFooter'
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Inter } from 'next/font/google'
+import DesktopLayout from '../components/DesktopLayout'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'All Violet - Official Band Website',
-  description: 'Welcome to the official website of All Violet',
+  title: 'All Violet',
+  description: 'Official website of All Violet',
 }
 
 export default function RootLayout({
@@ -16,16 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="/globals.css" />
-      </head>
-      <body className="flex flex-col min-h-screen">
-        <main className="flex-grow">
+      <body>
+        <DesktopLayout>
           {children}
-        </main>
-        <RetroFooter />
-        <SpeedInsights />
+        </DesktopLayout>
       </body>
     </html>
   )

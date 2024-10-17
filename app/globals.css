@@ -2,22 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes marquee {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-.animate-marquee {
-  animation: marquee 20s linear infinite;
+@font-face {
+  font-family: 'MS Sans Serif';
+  src: url('/fonts/MSSansSerif.woff2') format('woff2');
 }
 
 /* Retro background */
 html, body {
   height: 100%;
-  /* background-color: black; */ /* Remove or comment out this line */
-  background-image: url('/clouds.jpg'); /* Update this line */
-  background-repeat: repeat;
-  background-size: cover;
   color: #00FF00;
   font-family: 'Courier New', monospace;
   cursor: url('/images/retro-cursor.cur'), auto;
@@ -27,18 +19,6 @@ html, body {
 .blink {
   animation: blink-animation 1s steps(5, start) infinite;
   -webkit-animation: blink-animation 1s steps(5, start) infinite;
-}
-
-@keyframes blink-animation {
-  to {
-    visibility: hidden;
-  }
-}
-
-@-webkit-keyframes blink-animation {
-  to {
-    visibility: hidden;
-  }
 }
 
 /* Marquee style */
@@ -75,17 +55,10 @@ button {
   padding: 5px 10px;
   cursor: pointer;
 }
+
 button:hover {
   background-color: #00FF00;
   color: #000000;
-}
-
-/* Add any other global styles here */
-
-/* Reduce default margins and paddings */
-body, h1, h2, h3, p, ul, li, form {
-  margin: 0;
-  padding: 0;
 }
 
 /* RetroNavBar styles */
@@ -134,4 +107,26 @@ body, h1, h2, h3, p, ul, li, form {
   text-decoration: underline;
 }
 
-/* Keep your existing global styles below */
+/* RetroWindow styles */
+.retro-window {
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 12px;
+  user-select: none;
+}
+
+.retro-window-title {
+  background-color: #000080;
+  color: #FFFFFF;
+  padding: 2px 4px;
+  font-weight: bold;
+  cursor: move;
+}
+
+.retro-window-content {
+  padding: 8px;
+}
+
+.retro-window-close {
+  float: right;
+  cursor: pointer;
+}

@@ -1,14 +1,3 @@
-import RetroNavBar from '../components/RetroNavBar'
-import RetroHero from '../components/RetroHero'
+import Home from './home/page';
 
-export default function Home() {
-  return (
-    <div className="retro-container">
-      <RetroNavBar />
-      <main>
-        <RetroHero />
-        {/* Add any new components here if needed */}
-      </main>
-    </div>
-  )
-}
+export default Home;
