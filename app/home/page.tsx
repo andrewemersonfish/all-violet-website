@@ -1,15 +1,32 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Music from '../music/page';
 import Tour from '../tour/page';
 import Guestbook from '../guestbook/page';
 import Contact from '../contact/page';
 import WindowWrapper from '../../components/WindowWrapper';
+import SongsContent from '../../components/SongsContent';
 
 export default function Home() {
   const [activeWindows, setActiveWindows] = useState<string[]>(['home']);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Simulating an API call or data fetching
+    const fetchData = async () => {
+      try {
+        // Simulated API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        // If the API call was successful, we don't set an error
+      } catch (err) {
+        setError("Failed to load data. Please refresh the page.");
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const openWindow = (windowName: string) => {
     if (!activeWindows.includes(windowName)) {
@@ -28,12 +45,18 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen bg-cover bg-center" style={{backgroundImage: "url('/windows_background.jpg')"}}>
+    <div className="relative min-h-screen bg-cover bg-center invert" style={{backgroundImage: "url('/windows_background.jpg')"}}>
+      {error && (
+        <div className="fixed top-0 left-0 right-0 bg-[#FF0000] text-[#FFFFFF] p-2 text-center z-50">
+          {error}
+        </div>
+      )}
       <div className="fixed left-8 top-8 flex flex-col space-y-12">
         <IconLink onClick={() => openWindow('music')} icon="/icons/my_computer.png" text="Music" />
         <IconLink onClick={() => openWindow('tour')} icon="/icons/network_neighborhood.png" text="Tour" />
         <IconLink onClick={() => openWindow('guestbook')} icon="/icons/inbox.png" text="Guestbook" />
         <IconLink onClick={() => openWindow('contact')} icon="/icons/recycle_bin.png" text="Contact" />
+        <IconLink onClick={() => openWindow('songs')} icon="/icons/cd_audio.png" text="Songs" />
       </div>
 
       <div className="fixed right-8 top-8">
@@ -42,20 +65,18 @@ export default function Home() {
           width={300} 
           height={300} 
           alt="All Violet Logo" 
-          className="drop-shadow-lg"
+          className="drop-shadow-lg invert"
         />
       </div>
 
       {activeWindows.map((windowName, index) => (
-        <WindowWrapper 
-          key={windowName} 
-          title={getWindowTitle(windowName)} 
+        <WindowWrapper
+          key={windowName}
+          title={getWindowTitle(windowName)}
           onClose={() => closeWindow(windowName)}
           zIndex={index + 1}
         >
-          <div onClick={() => openWindow(windowName)}>
-            {getWindowContent(windowName)}
-          </div>
+          {getWindowContent(windowName)}
         </WindowWrapper>
       ))}
     </div>
@@ -78,6 +99,7 @@ function getWindowTitle(windowName: string): string {
     case 'tour': return 'Tour';
     case 'guestbook': return 'Guestbook';
     case 'contact': return 'Contact';
+    case 'songs': return 'Songs';
     default: return 'All Violet';
   }
 }
@@ -111,6 +133,7 @@ function getWindowContent(windowName: string): React.ReactNode {
     case 'tour': return <Tour />;
     case 'guestbook': return <Guestbook />;
     case 'contact': return <Contact />;
+    case 'songs': return <SongsContent />;
     default: return null;
   }
 }

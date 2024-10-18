@@ -13,9 +13,8 @@ export default function RetroWindow({ title, content, onClose, zIndex }: RetroWi
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    // Set initial random position
-    const randomX = Math.random() * 100 - 50; // -50 to 50
-    const randomY = Math.random() * 100 - 50; // -50 to 50
+    const randomX = Math.random() * 100 - 50;
+    const randomY = Math.random() * 100 - 50;
     setPosition({ x: randomX, y: randomY });
   }, []);
 
@@ -42,6 +41,7 @@ export default function RetroWindow({ title, content, onClose, zIndex }: RetroWi
       style={{ 
         zIndex,
         width: '500px',
+        minHeight: '300px',
         top: `calc(50% + ${position.y}px)`,
         left: `calc(50% + ${position.x}px)`,
         transform: 'translate(-50%, -50%)',
