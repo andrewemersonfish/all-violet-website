@@ -1,24 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
 
 export default function RetroNavBar() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  if (isMobile) {
-    return null;
-  }
-
   return (
     <nav className="bg-[#C0C0C0] p-4 border-b-2 border-[#808080]">
       <ul className="flex justify-center space-x-4">

@@ -8,20 +8,24 @@ import Guestbook from '../guestbook/page';
 import Contact from '../contact/page';
 import WindowWrapper from '../../components/WindowWrapper';
 import SongsContent from '../../components/SongsContent';
-import MobileWindow from '../../components/MobileWindow';
 
 export default function Home() {
   const [activeWindows, setActiveWindows] = useState<string[]>(['home']);
   const [error, setError] = useState<string | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    // Simulating an API call or data fetching
+    const fetchData = async () => {
+      try {
+        // Simulated API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        // If the API call was successful, we don't set an error
+      } catch (err) {
+        setError("Failed to load data. Please refresh the page.");
+      }
     };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+
+    fetchData();
   }, []);
 
   const openWindow = (windowName: string) => {
@@ -41,41 +45,31 @@ export default function Home() {
   };
 
   return (
-    <div className={`relative min-h-screen ${isMobile ? 'bg-black' : 'bg-cover bg-center'}`} style={!isMobile ? {backgroundImage: "url('/windows_background.jpg')"} : {}}>
+    <div className="relative min-h-screen bg-cover bg-center" style={{backgroundImage: "url('/windows_background.jpg')"}}>
       {error && (
         <div className="fixed top-0 left-0 right-0 bg-[#FF0000] text-[#FFFFFF] p-2 text-center z-50">
           {error}
         </div>
       )}
-      {!isMobile && (
-        <div className="fixed left-8 top-8 flex flex-col space-y-2">
-          <IconLink onClick={() => openWindow('music')} icon="/icons/music_icon.png" text="Music" />
-          <IconLink onClick={() => openWindow('tour')} icon="/icons/ticket.png" text="Tour" />
-          <IconLink onClick={() => openWindow('guestbook')} icon="/icons/contacts.png" text="Guestbook" />
-          <IconLink onClick={() => openWindow('contact')} icon="/icons/information.png" text="Contact" />
-          <IconLink onClick={() => openWindow('songs')} icon="/icons/spotify.png" text="Songs" />
-        </div>
-      )}
+      <div className="fixed left-8 top-8 flex flex-col space-y-2">
+        <IconLink onClick={() => openWindow('music')} icon="/icons/music_icon.png" text="Music" />
+        <IconLink onClick={() => openWindow('tour')} icon="/icons/ticket.png" text="Tour" />
+        <IconLink onClick={() => openWindow('guestbook')} icon="/icons/contacts.png" text="Guestbook" />
+        <IconLink onClick={() => openWindow('contact')} icon="/icons/information.png" text="Contact" />
+        <IconLink onClick={() => openWindow('songs')} icon="/icons/spotify.png" text="Songs" />
+      </div>
+
+     
 
       {activeWindows.map((windowName, index) => (
-        isMobile ? (
-          <MobileWindow
-            key={windowName}
-            title={getWindowTitle(windowName)}
-            onClose={() => closeWindow(windowName)}
-          >
-            {getWindowContent(windowName)}
-          </MobileWindow>
-        ) : (
-          <WindowWrapper
-            key={windowName}
-            title={getWindowTitle(windowName)}
-            onClose={() => closeWindow(windowName)}
-            zIndex={index + 1}
-          >
-            {getWindowContent(windowName)}
-          </WindowWrapper>
-        )
+        <WindowWrapper
+          key={windowName}
+          title={getWindowTitle(windowName)}
+          onClose={() => closeWindow(windowName)}
+          zIndex={index + 1}
+        >
+          {getWindowContent(windowName)}
+        </WindowWrapper>
       ))}
     </div>
   );

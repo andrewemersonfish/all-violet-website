@@ -11,26 +11,12 @@ export default function RetroWindow({ title, content, onClose, zIndex }: RetroWi
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const randomX = Math.random() * 100 - 50;
     const randomY = Math.random() * 100 - 50;
     setPosition({ x: randomX, y: randomY });
   }, []);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  if (isMobile) {
-    return null;
-  }
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);

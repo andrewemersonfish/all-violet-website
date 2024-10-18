@@ -1,33 +1,52 @@
-import React from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
-interface IconProps {
-  href: string;
-  icon: string;
-  text: string;
+interface MobileLayoutProps {
+  children: React.ReactNode;
 }
 
-const Icon: React.FC<IconProps> = ({ href, icon, text }) => (
-  <Link href={href} className="flex flex-col items-center">
-    <Image src={icon} alt={text} width={60} height={60} className="rounded-xl" />
-    <span className="text-white text-xs mt-1">{text}</span>
-  </Link>
-);
+export default function MobileLayout({ children }: MobileLayoutProps) {
+  const [activeWindow, setActiveWindow] = useState<string | null>(null);
 
-const MobileLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const openWindow = (windowName: string) => {
+    setActiveWindow(windowName);
+  };
+
+  const closeWindow = () => {
+    setActiveWindow(null);
+  };
+
+  const icons = [
+    { name: 'Home', icon: '/icons/home.png' },
+    { name: 'Music', icon: '/icons/music_icon.png' },
+    { name: 'Tour', icon: '/icons/ticket.png' },
+    { name: 'Guestbook', icon: '/icons/contacts.png' },
+    { name: 'Contact', icon: '/icons/information.png' },
+    { name: 'Songs', icon: '/icons/spotify.png' },
+  ];
+
   return (
-    <div className="bg-black min-h-screen p-4">
-      <div className="grid grid-cols-4 gap-4 mb-8">
-        <Icon href="/music" icon="/icons/music_icon.png" text="Music" />
-        <Icon href="/tour" icon="/icons/ticket.png" text="Tour" />
-        <Icon href="/guestbook" icon="/icons/contacts.png" text="Guestbook" />
-        <Icon href="/contact" icon="/icons/information.png" text="Contact" />
-        <Icon href="/songs" icon="/icons/spotify.png" text="Songs" />
-      </div>
-      {children}
+    <div className="min-h-screen bg-cover bg-center p-4" style={{ backgroundImage: "url('/mobile_background.jpg')" }}>
+      {activeWindow ? (
+        <div className="fixed inset-0 bg-white z-50">
+          <div className="bg-gray-200 p-2 flex justify-between items-center">
+            <h2 className="font-bold">{activeWindow}</h2>
+            <button onClick={closeWindow} className="text-2xl">&times;</button>
+          </div>
+          <div className="p-4">
+            {children}
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 gap-4">
+          {icons.map((icon) => (
+            <div key={icon.name} className="flex flex-col items-center" onClick={() => openWindow(icon.name)}>
+              <Image src={icon.icon} alt={icon.name} width={50} height={50} />
+              <span className="text-white mt-2 bg-black bg-opacity-50 px-2 py-1 rounded">{icon.name}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
-};
-
-export default MobileLayout;
+}
