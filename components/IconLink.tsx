@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
 
 interface IconLinkProps {
   href: string;
@@ -10,9 +11,22 @@ interface IconLinkProps {
 }
 
 export default function IconLink({ href, icon, text }: IconLinkProps) {
+  const [isActive, setIsActive] = useState(false);
+
   return (
-    <Link href={href} className="flex flex-col items-center cursor-pointer group">
-      <Image src={icon} alt={`${text} Icon`} width={60} height={60} className="group-hover:scale-110 transition-transform" />
+    <Link 
+      href={href} 
+      className="flex flex-col items-center cursor-pointer group"
+      onTouchStart={() => setIsActive(true)}
+      onTouchEnd={() => setIsActive(false)}
+    >
+      <Image 
+        src={icon} 
+        alt={`${text} Icon`} 
+        width={60} 
+        height={60} 
+        className={`transition-transform ${isActive ? 'scale-110' : ''}`} 
+      />
       <span className="text-white text-xl mt-2 bg-black bg-opacity-50 px-2 py-1 rounded">{text}</span>
     </Link>
   );
