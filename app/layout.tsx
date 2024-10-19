@@ -1,14 +1,20 @@
 import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-import DesktopLayout from '../components/DesktopLayout'
+import LayoutWrapper from '../components/LayoutWrapper'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'All Violet',
   description: 'Official website of All Violet',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export default function RootLayout({
@@ -19,9 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <DesktopLayout>
+        <LayoutWrapper>
           {children}
-        </DesktopLayout>
+        </LayoutWrapper>
       </body>
     </html>
   )
